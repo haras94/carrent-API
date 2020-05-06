@@ -1,32 +1,26 @@
-const user = require('../models').user
-const gender = require('../models').gender
-const status = require('../models').status
-const role = require('../models').role
+const rentaller = require('../models').rentaller
 const helpers = require('../helpers/response')
 const bcrypt = require('bcryptjs')
 
 module.exports = {
-  registerUser: async (req, res) => {
+  registerRentaller: async (req, res) => {
     const response = {}
     try {
       const salt = bcrypt.genSaltSync(10)
 
-      const data = await user.create({
+      const data = await rentaller.create({
         fullname: req.body.fullname,
-        address: req.body.address,
-        phone_number: req.body.phone_number,
+        rental_name: req.body.rental_name,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, salt),
+        address: req.body.address,
+        phone_number: req.body.phone_number,
         id_card: req.body.id_card,
-        gender: req.body.gender,
-        image: 'photo.jpg',
-        rentaller_id: 0,
-        role_id: 0,
-        status: 0
+        image: 'photo.jpg'
       })
       if (data === undefined) {
         response.status = 203
-        response.message = 'Data Tidak Ditemukan'
+        response.message = 'Data Not Found'
         helpers.helpers(res, response)
       } else {
         response.status = 200
@@ -39,21 +33,20 @@ module.exports = {
       response.status = 500
       response.message = 'Internal Server Error'
       response.err = err
-
       helpers.helpers(res, response)
     }
   },
-  loginUser: async (req, res) => {
+  loginRentaller: async (req, res) => {
     let response = {}
     try {
-      const data = await user.findOne({
+      const data = await rentaller.findOne({
         where: {
           email: req.body.email
         }
       })
       if (!data) {
         response.status = 203
-        response.message = 'Email Salah'
+        response.message = 'Wrong Email'
         helpers.helpers(res, response)
       } else if (data) {
         const authorized = bcrypt.compareSync(req.body.password, data.dataValues.password)
@@ -65,7 +58,7 @@ module.exports = {
           helpers.helpers(res, response)
         } else {
           response.status = 203
-          response.message = 'password Salah'
+          response.message = 'Wrong Password'
           helpers.helpers(res, response)
         }
       }
@@ -78,28 +71,13 @@ module.exports = {
     }
   },
 
-  getUser: async (req, res) => {
+  getRentaller: async (req, res) => {
     let response = {}
     try {
-      const data = await user.findAll({
-        include: [{
-          model: gender,
-          as: 'genderName',
-          attributes: ['name']
-        },
-        {
-          model: status,
-          as: 'isActive',
-          attributes: ['isActived']
-        },
-        {
-          model: role,
-          as: 'roleName',
-          attributes: ['role']
-        }]
-      })
+      const data = await rentaller.findAll({})
+
       if (data.length === 0) {
-        response.status = 404
+        response.status = 203
         response.message = 'User List not Found!'
         helpers.helpers(res, response)
       } else {
@@ -116,34 +94,18 @@ module.exports = {
       helpers.helpers(res, response)
     }
   },
-  detailUser: async (req, res) => {
+  detailRentaller: async (req, res) => {
     let response = {}
     try {
-      const userId = req.params.userId
-
-      const data = await user.findOne({
+      const rentallerId = req.params.rentallerId
+      const data = await rentaller.findOne({
         where: {
-          id: userId
-        },
-        include: [{
-          model: gender,
-          as: 'genderName',
-          attributes: ['name']
-        },
-        {
-          model: status,
-          as: 'isActive',
-          attributes: ['isActived']
-        },
-        {
-          model: role,
-          as: 'roleName',
-          attributes: ['role']
-        }]
+          id: rentallerId
+        }
       })
       if (!data) {
         response.status = 203
-        response.message = 'Detail User Tidak Ditemukan!'
+        response.message = 'Detail Rentaller Tidak Ditemukan!'
         helpers.helpers(res, response)
       } else {
         response.status = 200
@@ -160,23 +122,19 @@ module.exports = {
     }
   },
 
-  updateUser: async (req, res) => {
+  updateRentaller: async (req, res) => {
     let response = {}
     try {
-      // const salt = bcrypt.genSaltSync(10)
-      const userId = req.params.userId
-      // const password = bcrypt.hashSync(req.body.password, salt)
+      const rentallerId = req.params.rentallerId
       const body = req.body
-      // body = Object.assign(body, { password })
-      // console.log(body)
-      const [edit] = await user.update(body, {
+      const [edit] = await rentaller.update(body, {
         where: {
-          id: userId
+          id: rentallerId
         }
       })
-      const data = await user.findOne({
+      const data = await rentaller.findOne({
         where: {
-          id: userId
+          id: rentallerId
         }
       })
       if (edit === 1) {
@@ -196,13 +154,14 @@ module.exports = {
       helpers.helpers(res, response)
     }
   },
-  deleteUser: async (req, res) => {
+
+  deleteRentaller: async (req, res) => {
     let response = {}
     try {
-      const userId = req.params.userId
-      const data = await user.destroy({
+      const rentallerId = req.params.rentallerId
+      const data = await rentaller.destroy({
         where: {
-          id: userId
+          id: rentallerId
         }
       })
       if (data) {
