@@ -26,7 +26,7 @@ module.exports = {
       })
       if (data === undefined) {
         response.status = 203
-        response.message = 'Data Not Found'
+        response.message = 'Data Tidak Ditemukan'
         helpers.helpers(res, response)
       } else {
         response.status = 200
@@ -53,7 +53,7 @@ module.exports = {
       })
       if (!data) {
         response.status = 203
-        response.message = 'Wrong Email'
+        response.message = 'Email Salah'
         helpers.helpers(res, response)
       } else if (data) {
         const authorized = bcrypt.compareSync(req.body.password, data.dataValues.password)
@@ -65,7 +65,7 @@ module.exports = {
           helpers.helpers(res, response)
         } else {
           response.status = 203
-          response.message = 'Wrong Password'
+          response.message = 'password Salah'
           helpers.helpers(res, response)
         }
       }
