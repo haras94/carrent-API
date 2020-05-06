@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const rentaller = sequelize.define('rentaller', {
     fullname: DataTypes.STRING,
@@ -8,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING,
     phone_number: DataTypes.STRING,
     id_card: DataTypes.STRING
-  }, {});
-  rentaller.associate = function(models) {
+  }, {})
+  rentaller.associate = function (models) {
     // associations can be defined here
-  };
-  return rentaller;
-};
+  }
+  return rentaller
+}
