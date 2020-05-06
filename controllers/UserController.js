@@ -142,8 +142,8 @@ module.exports = {
         }]
       })
       if (!data) {
-        response.status = 404
-        response.message = 'User Detail not Found!'
+        response.status = 203
+        response.message = 'Detail User Tidak Ditemukan!'
         helpers.helpers(res, response)
       } else {
         response.status = 200
