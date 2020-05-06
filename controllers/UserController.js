@@ -25,7 +25,7 @@ module.exports = {
         status: 0
       })
       if (data === undefined) {
-        response.status = 404
+        response.status = 203
         response.message = 'Data Not Found'
         helpers.helpers(res, response)
       } else {
@@ -52,7 +52,7 @@ module.exports = {
         }
       })
       if (!data) {
-        response.status = 404
+        response.status = 203
         response.message = 'Wrong Email'
         helpers.helpers(res, response)
       } else if (data) {
@@ -64,7 +64,7 @@ module.exports = {
           response.data = data.dataValues
           helpers.helpers(res, response)
         } else {
-          response.status = 404
+          response.status = 203
           response.message = 'Wrong Password'
           helpers.helpers(res, response)
         }
