@@ -18,8 +18,22 @@ module.exports = {
         id_card: req.body.id_card,
         image: 'photo.jpg'
       })
+      if (data === undefined) {
+        response.status = 203
+        response.message = 'Data Not Found'
+        helpers.helpers(res, response)
+      } else {
+        response.status = 200
+        response.message = 'OK'
+        response.data = data
+        helpers.helpers(res, response)
+      }
     } catch (err) {
-
+      const response = {}
+      response.status = 500
+      response.message = 'Internal Server Error'
+      response.err = err
+      helpers.helpers(res, response)
     }
   }
 }
