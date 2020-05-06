@@ -1,4 +1,7 @@
 const user = require('../models').user
+const gender = require('../models').gender
+const status = require('../models').status
+const role = require('../models').role
 const helpers = require('../helpers/response')
 const bcrypt = require('bcryptjs')
 
@@ -78,7 +81,23 @@ module.exports = {
   getUser: async (req, res) => {
     let response = {}
     try {
-      const data = await user.findAll({})
+      const data = await user.findAll({
+        include: [{
+          model: gender,
+          as: 'genderName',
+          attributes: ['name']
+        },
+        {
+          model: status,
+          as: 'isActive',
+          attributes: ['isActived']
+        },
+        {
+          model: role,
+          as: 'roleName',
+          attributes: ['role']
+        }]
+      })
       if (data.length === 0) {
         response.status = 404
         response.message = 'User List not Found!'
@@ -105,7 +124,22 @@ module.exports = {
       const data = await user.findOne({
         where: {
           id: userId
-        }
+        },
+        include: [{
+          model: gender,
+          as: 'genderName',
+          attributes: ['name']
+        },
+        {
+          model: status,
+          as: 'isActive',
+          attributes: ['isActived']
+        },
+        {
+          model: role,
+          as: 'roleName',
+          attributes: ['role']
+        }]
       })
       if (!data) {
         response.status = 404
