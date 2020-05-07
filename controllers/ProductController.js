@@ -1,5 +1,9 @@
-/* eslint-disable no-unused-vars */
-const { product, imageDetail } = require('../models')
+/* eslint-disable camelcase */
+const {
+  product, imageDetail, transmission, baggage_capacity, fuel_type, engine_capacity,
+  additional_driver, person_capacity, doors, manufacturing_year, avg_fuel_consumption,
+  srs_airbag
+} = require('../models')
 const { Op } = require('sequelize')
 const helpers = require('../helpers/response')
 
@@ -54,6 +58,56 @@ module.exports = {
           model: imageDetail,
           as: 'images',
           attributes: ['image']
+        },
+        {
+          model: transmission,
+          as: 'transmissionType',
+          attributes: ['name']
+        },
+        {
+          model: baggage_capacity,
+          as: 'baggageCapacity',
+          attributes: ['name']
+        },
+        {
+          model: engine_capacity,
+          as: 'engineCapacity',
+          attributes: ['name']
+        },
+        {
+          model: fuel_type,
+          as: 'fuelType',
+          attributes: ['name']
+        },
+        {
+          model: additional_driver,
+          as: 'additionalDriver',
+          attributes: ['name']
+        },
+        {
+          model: person_capacity,
+          as: 'personCapacity',
+          attributes: ['name']
+        },
+        {
+          model: doors,
+          as: 'doorsType',
+          attributes: ['name']
+        },
+        {
+          model: manufacturing_year,
+          as: 'manufacturingYear',
+          attributes: ['name']
+        },
+        {
+          model: avg_fuel_consumption,
+          as: 'avgFuelConsumption',
+          attributes: ['name']
+        },
+        {
+          model: srs_airbag,
+          as: 'srsAirbag',
+          attributes: ['name']
         }
       ]
       let sortType = req.query.sort_type || ''
@@ -115,6 +169,51 @@ module.exports = {
           model: imageDetail,
           as: 'images',
           attributes: ['image']
+        },
+        {
+          model: transmission,
+          as: 'transmissionType',
+          attributes: ['name']
+        },
+        {
+          model: baggage_capacity,
+          as: 'baggageCapacity',
+          attributes: ['name']
+        },
+        {
+          model: fuel_type,
+          as: 'fuelType',
+          attributes: ['name']
+        },
+        {
+          model: additional_driver,
+          as: 'additionalDriver',
+          attributes: ['name']
+        },
+        {
+          model: person_capacity,
+          as: 'personCapacity',
+          attributes: ['name']
+        },
+        {
+          model: doors,
+          as: 'doorsType',
+          attributes: ['name']
+        },
+        {
+          model: manufacturing_year,
+          as: 'manufacturingYear',
+          attributes: ['name']
+        },
+        {
+          model: avg_fuel_consumption,
+          as: 'avgFuelConsumption',
+          attributes: ['name']
+        },
+        {
+          model: srs_airbag,
+          as: 'srsAirbag',
+          attributes: ['name']
         }
       ]
       param.where = where

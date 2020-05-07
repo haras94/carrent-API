@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     additional_driver: DataTypes.INTEGER,
     person_capacity: DataTypes.INTEGER,
     doors: DataTypes.INTEGER,
-    manufacturin_year: DataTypes.INTEGER,
+    manufacturing_year: DataTypes.INTEGER,
+    fuel_type: DataTypes.INTEGER,
     avg_fuel_consumption: DataTypes.INTEGER,
     srs_airbag: DataTypes.INTEGER,
     rating: DataTypes.INTEGER
@@ -21,7 +22,68 @@ module.exports = (sequelize, DataTypes) => {
       {
         foreignKey: 'product_id',
         as: 'images'
-      })
+      }
+    )
+    product.belongsTo(models.transmission,
+      {
+        foreignKey: 'transmission_id',
+        as: 'transmissionType'
+      }
+    )
+    product.belongsTo(models.baggage_capacity,
+      {
+        foreignKey: 'baggage_capacity',
+        as: 'baggageCapacity'
+      }
+    )
+    product.belongsTo(models.fuel_type,
+      {
+        foreignKey: 'fuel_type',
+        as: 'fuelType'
+      }
+    )
+    product.belongsTo(models.engine_capacity,
+      {
+        foreignKey: 'engine_capacity',
+        as: 'engineCapacity'
+      }
+    )
+    product.belongsTo(models.additional_driver,
+      {
+        foreignKey: 'additional_driver',
+        as: 'additionalDriver'
+      }
+    )
+    product.belongsTo(models.person_capacity,
+      {
+        foreignKey: 'person_capacity',
+        as: 'personCapacity'
+      }
+    )
+    product.belongsTo(models.doors,
+      {
+        foreignKey: 'doors',
+        as: 'doorsType'
+      }
+    )
+    product.belongsTo(models.manufacturing_year,
+      {
+        foreignKey: 'manufacturing_year',
+        as: 'manufacturingYear'
+      }
+    )
+    product.belongsTo(models.avg_fuel_consumption,
+      {
+        foreignKey: 'avg_fuel_consumption',
+        as: 'avgFuelConsumption'
+      }
+    )
+    product.belongsTo(models.srs_airbag,
+      {
+        foreignKey: 'srs_airbag',
+        as: 'srsAirbag'
+      }
+    )
   }
   return product
 }
