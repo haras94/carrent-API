@@ -163,12 +163,8 @@ module.exports = {
   updateUser: async (req, res) => {
     let response = {}
     try {
-      // const salt = bcrypt.genSaltSync(10)
       const userId = req.params.userId
-      // const password = bcrypt.hashSync(req.body.password, salt)
       const body = req.body
-      // body = Object.assign(body, { password })
-      // console.log(body)
       const [edit] = await user.update(body, {
         where: {
           id: userId
@@ -191,6 +187,38 @@ module.exports = {
       }
     } catch (err) {
       response = {}
+      response.status = 500
+      response.message = 'Internal Server Error'
+      helpers.helpers(res, response)
+    }
+  },
+  uploadImage: async (req, res) => {
+    const response = {}
+    try {
+      const { userId } = req.params
+      const [edit] = await user.update({ image: `http://${req.get('host')}/${req.file.path.replace(/\\/g, '/')}` },
+        {
+          where: {
+            id: userId
+          }
+        }
+      )
+      const data = await user.findOne({
+        where: {
+          id: userId
+        }
+      })
+      if (edit === 1) {
+        response.status = 200
+        response.message = 'Profile Successfully Edited!'
+        response.data = data
+        helpers.helpers(res, response)
+      } if (edit === 0) {
+        response.status = 203
+        response.message = 'Data Not Found'
+        helpers.helpers(res, response)
+      }
+    } catch (err) {
       response.status = 500
       response.message = 'Internal Server Error'
       helpers.helpers(res, response)
