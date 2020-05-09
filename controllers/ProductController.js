@@ -2,7 +2,7 @@
 const {
   product, imageDetail, transmission, baggage_capacity, fuel_type, engine_capacity,
   additional_driver, person_capacity, doors, manufacturing_year, avg_fuel_consumption,
-  srs_airbag
+  srs_airbag, car_brand
 } = require('../models')
 const { Op } = require('sequelize')
 const helpers = require('../helpers/response')
@@ -58,6 +58,11 @@ module.exports = {
           model: imageDetail,
           as: 'images',
           attributes: ['image']
+        },
+        {
+          model: car_brand,
+          as: 'carBrand',
+          attributes: ['name']
         },
         {
           model: transmission,
@@ -169,6 +174,11 @@ module.exports = {
           model: imageDetail,
           as: 'images',
           attributes: ['image']
+        },
+        {
+          model: car_brand,
+          as: 'carBrand',
+          attributes: ['name']
         },
         {
           model: transmission,

@@ -86,6 +86,12 @@ module.exports = (sequelize, DataTypes) => {
         as: 'srsAirbag'
       }
     )
+    product.belongsTo(models.car_brand,
+      {
+        foreignKey: 'car_brand',
+        as: 'carBrand'
+      }
+    )
   }
   return product
 }
