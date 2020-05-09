@@ -62,7 +62,7 @@ module.exports = {
         {
           model: rentaller,
           as: 'rentaller',
-          attributes: ['fullname', 'address']
+          attributes: ['rental_name', 'address']
         },
         {
           model: car_brand,
@@ -179,6 +179,11 @@ module.exports = {
           model: imageDetail,
           as: 'images',
           attributes: ['image']
+        },
+        {
+          model: rentaller,
+          as: 'rentaller',
+          attributes: ['rental_name', 'address']
         },
         {
           model: car_brand,
