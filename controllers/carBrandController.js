@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const { car_brand } = require('../models')
+const { car_brand, product } = require('../models')
 const helpers = require('../helpers/response')
 
 module.exports = {
@@ -53,6 +53,11 @@ module.exports = {
     try {
       const { carBrandId } = req.params
       const data = await car_brand.findOne({
+        include: {
+          model: product,
+          as: 'productList',
+          attributes: ['name']
+        },
         where: {
           id: carBrandId
         }

@@ -2,17 +2,18 @@ const jwt = require('jsonwebtoken')
 
 module.exports = {
   verify: (req, res, next) => {
-    const token = req.headers.authorization
+    const token = req.headers['x-access-token']
+    console.log(token)
 
     try {
-      const decoded = jwt.verify(token, process.env.SECRET_KEY)
-      console.log(decoded)
-      req.id_user = decoded.id
+      var docoded = jwt.verify(token, process.env.SECRET_KEY)
+      console.log('decoded:', docoded)
       next()
     } catch (err) {
-      res.status(400).json({
-        message: 'token invalid'
+      res.json({
+        msg: 'invailid token'
       })
     }
   }
+
 }
