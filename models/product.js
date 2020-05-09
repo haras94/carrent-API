@@ -26,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
         as: 'images'
       }
     )
+    product.belongsTo(models.rentaller,
+      {
+        foreignKey: 'rentaller_id',
+        as: 'rentaller'
+      }
+    )
     product.belongsTo(models.transmission,
       {
         foreignKey: 'transmission_id',
