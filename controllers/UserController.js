@@ -6,7 +6,7 @@ const helpers = require('../helpers/response')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { Op } = require('sequelize')
-const mail = require('../helpers/mail')
+const mail = require('../helpers/mailUser')
 require('dotenv').config()
 
 module.exports = {
@@ -45,6 +45,7 @@ module.exports = {
           const encrypt = jwt.sign({ id: data.id, email: data.email }, process.env.SECRET_KEY)
           const dataEmail = {
             email: data.email,
+            fullname: data.fullname,
             encrypt
           }
           mail.send(dataEmail)
@@ -314,8 +315,7 @@ module.exports = {
           where: {
             id: userId
           }
-        }
-      )
+        })
       const data = await user.findOne({
         where: {
           id: userId
