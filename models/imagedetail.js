@@ -1,11 +1,17 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const imageDetail = sequelize.define('imageDetail', {
     product_id: DataTypes.STRING,
     image: DataTypes.STRING
-  }, {});
-  imageDetail.associate = function(models) {
+  }, {})
+  imageDetail.associate = function (models) {
     // associations can be defined here
-  };
-  return imageDetail;
-};
+    imageDetail.belongsTo(models.product,
+      {
+        foreignKey: 'product_id',
+        as: 'images',
+        sourceKey: 'id'
+      })
+  }
+  return imageDetail
+}

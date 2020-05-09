@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     product.hasMany(models.imageDetail,
       {
         foreignKey: 'product_id',
-        as: 'images'
+        as: 'images',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.rentaller,
@@ -35,61 +36,71 @@ module.exports = (sequelize, DataTypes) => {
     product.belongsTo(models.transmission,
       {
         foreignKey: 'transmission_id',
-        as: 'transmissionType'
+        as: 'transmissionType',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.baggage_capacity,
       {
         foreignKey: 'baggage_capacity',
-        as: 'baggageCapacity'
+        as: 'baggageCapacity',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.fuel_type,
       {
         foreignKey: 'fuel_type',
-        as: 'fuelType'
+        as: 'fuelType',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.engine_capacity,
       {
         foreignKey: 'engine_capacity',
-        as: 'engineCapacity'
+        as: 'engineCapacity',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.additional_driver,
       {
         foreignKey: 'additional_driver',
-        as: 'additionalDriver'
+        as: 'additionalDriver',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.person_capacity,
       {
         foreignKey: 'person_capacity',
-        as: 'personCapacity'
+        as: 'personCapacity',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.doors,
       {
         foreignKey: 'doors',
-        as: 'doorsType'
+        as: 'doorsType',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.manufacturing_year,
       {
         foreignKey: 'manufacturing_year',
-        as: 'manufacturingYear'
+        as: 'manufacturingYear',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.avg_fuel_consumption,
       {
         foreignKey: 'avg_fuel_consumption',
-        as: 'avgFuelConsumption'
+        as: 'avgFuelConsumption',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.srs_airbag,
       {
         foreignKey: 'srs_airbag',
-        as: 'srsAirbag'
+        as: 'srsAirbag',
+        sourceKey: 'id'
       }
     )
     product.belongsTo(models.car_brand,

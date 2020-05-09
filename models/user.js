@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     user.belongsTo(models.gender,
       {
         foreignKey: 'gender',
-        as: 'genderName'
+        as: 'genderName',
+        sourceKey: 'id'
       }
     )
     user.belongsTo(models.status,

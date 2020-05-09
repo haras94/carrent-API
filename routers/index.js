@@ -7,6 +7,7 @@ const product = require('./product')
 const ourPartner = require('./ourPartner')
 const order = require('./order')
 const carBrand = require('./carBrand')
+const join = require('./join')
 
 router
   .use('/user', user)
@@ -15,6 +16,7 @@ router
   .use('/ourpartner', ourPartner)
   .use('/order', order)
   .use('/carbrand', carBrand)
+  .use('/', join)
   .get('/', function (req, res) {
     res.send({
       message: 'Welcome to CARRENT API',
