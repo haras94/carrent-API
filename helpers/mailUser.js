@@ -56,7 +56,7 @@ module.exports = {
       </head>
       <body>
           <h2>Verifikasi alamat email kamu</h2>
-          <p>Terima kasih telah melakukan registrasi di CARRENT atas nama ${data.fullname}.
+          <p>Terima kasih telah melakukan registrasi di CARRENT atas nama ${data.data.fullname}.
           Verifikasi email anda dengan mengklik link dibawah ini,agar anda dapat menikmati proses rental mobil di website kami.
           Klik tombol dibawah atau <a href="${process.env.ACTIVATION_USER + data.encrypt}" class="link-1">link ini</a> untuk mengaktifkan akun</p>
               <a href="${process.env.ACTIVATION_USER + data.encrypt}" class="link">Verifikasi Alamat Email</a>

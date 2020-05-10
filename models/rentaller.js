@@ -7,10 +7,16 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     address: DataTypes.STRING,
     phone_number: DataTypes.STRING,
-    id_card: DataTypes.STRING
+    id_card: DataTypes.STRING,
+    status: DataTypes.INTEGER
   }, {})
   rentaller.associate = function (models) {
     // associations can be defined here
+    rentaller.belongsTo(models.status, {
+      foreignKey: 'status',
+      as: 'isActivated',
+      sourceKey: 'id'
+    })
   }
   return rentaller
 }
