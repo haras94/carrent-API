@@ -1,6 +1,4 @@
-const user = require('../models').user
-const gender = require('../models').gender
-const status = require('../models').status
+const { user, gender, status } = require('../models')
 const role = require('../models').role
 const helpers = require('../helpers/response')
 const bcrypt = require('bcryptjs')
@@ -235,19 +233,14 @@ module.exports = {
     let response = {}
     try {
       const userId = req.params.userId
-      const body = {
-        fullname: req.body.fullname,
-        address: req.body.address,
-        phone_number: req.body.phone_number,
-        email: req.body.email,
-        id_card: req.body.id_card,
-        gender: req.body.gender
-      }
-      const [edit] = await user.update(body, {
-        where: {
-          id: userId
-        }
-      })
+      const body = req.body
+      console.log(req.body)
+      const [edit] = await user.update(body,
+        {
+          where: {
+            id: userId
+          }
+        })
       const data = await user.findOne({
         where: {
           id: userId
