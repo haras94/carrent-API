@@ -339,6 +339,7 @@ module.exports = {
   uploadImage: async (req, res) => {
     const response = {}
     const { files } = req
+    console.log(files)
     try {
       const { productId } = req.params
       files.forEach(file => {

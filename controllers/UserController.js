@@ -58,7 +58,7 @@ module.exports = {
       response.status = 500
       response.message = 'Internal Server Error'
       response.err = err
-
+      console.log(err)
       helpers.helpers(res, response)
     }
   },
@@ -234,7 +234,6 @@ module.exports = {
     try {
       const userId = req.params.userId
       const body = req.body
-      console.log(req.body)
       const [edit] = await user.update(body,
         {
           where: {
@@ -298,7 +297,6 @@ module.exports = {
       helpers.helpers(res, response)
     }
   },
-
   uploadImage: async (req, res) => {
     const response = {}
     try {
@@ -319,7 +317,7 @@ module.exports = {
         response.message = 'Profile Successfully Edited!'
         response.data = data
         helpers.helpers(res, response)
-      } if (edit === 0) {
+      } else if (edit === 0) {
         response.status = 203
         response.message = 'Data Not Found'
         helpers.helpers(res, response)

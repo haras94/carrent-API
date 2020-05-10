@@ -38,7 +38,7 @@ module.exports = {
         } else {
           const encrypt = jwt.sign({ id: data.id, email: data.email }, process.env.SECRET_KEY)
           const dataEmail = {
-            email: 'apnaisa@gmail.com',
+            email: 'maniskntl71@gmail.com',
             rental_name: data.rental_name,
             encrypt
           }
@@ -197,14 +197,7 @@ module.exports = {
     let response = {}
     try {
       const rentallerId = req.params.rentallerId
-      const body = {
-        fullname: req.body.fullname,
-        rental_name: req.body.rental_name,
-        address: req.body.address,
-        phone_number: req.body.phone_number,
-        email: req.body.email,
-        id_card: req.body.id_card
-      }
+      const body = req.body
       const [edit] = await rentaller.update(body, {
         where: {
           id: rentallerId
@@ -283,14 +276,15 @@ module.exports = {
           id: rentallerId
         }
       })
-      if (edit === 0) {
-        response.status = 203
-        response.message = 'Data Not Found'
-        helpers.helpers(res, response)
-      } if (edit === 1) {
+      console.log(rentallerId)
+      if (edit === 1) {
         response.status = 200
         response.message = 'Profile Successfully Edited!'
         response.data = data
+        helpers.helpers(res, response)
+      } else if (edit === 0) {
+        response.status = 203
+        response.message = 'Data Not Found'
         helpers.helpers(res, response)
       }
     } catch (err) {
