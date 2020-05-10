@@ -26,6 +26,7 @@ module.exports = {
             image: url
           })
         })
+        console.log(files)
         response.status = 201
         response.message = 'Product Has Been Created'
         response.data = data
@@ -129,7 +130,7 @@ module.exports = {
       if (search !== undefined) {
         const where = {
           [Op.or]: [
-            { title: { [Op.substring]: search } }
+            { car_title: { [Op.substring]: search } }
           ]
         }
         console.log('here')
@@ -258,6 +259,7 @@ module.exports = {
 
   updateProduct: async (req, res) => {
     const response = {}
+    // const { files } = req
     try {
       const { productId } = req.params
       const body = req.body
@@ -278,6 +280,22 @@ module.exports = {
         response.message = 'Product not Found!'
         helpers.helpers(res, response)
       } if (edit === 1) {
+        // imageDetail.destroy({
+        //   where: {
+        //     product_id: productId
+        //   }
+        // })
+        // files.forEach(file => {
+        //   const url = `http://${req.get('host')}/${file.path.replace(/\\/g, '/')}`
+        //   imageDetail.create({
+        //     product_id: data.id,
+        //     image: url
+        //   }, {
+        //     where: {
+        //       product_id: productId
+        //     }
+        //   })
+        // })
         response.status = 200
         response.message = 'OK!'
         response.data = data
@@ -308,6 +326,114 @@ module.exports = {
       } else {
         response.status = 404
         response.message = 'Data Not Found'
+        helpers.helpers(res, response)
+      }
+    } catch (err) {
+      const response = {}
+      response.status = 500
+      response.message = 'Internal Server Error'
+      response.err = err
+      helpers.helpers(res, response)
+    }
+  },
+  uploadImage: async (req, res) => {
+    const response = {}
+    const { files } = req
+    try {
+      const { productId } = req.params
+      files.forEach(file => {
+        const url = `http://${req.get('host')}/${file.path.replace(/\\/g, '/')}`
+        imageDetail.create({
+          product_id: productId,
+          image: url
+        }, {
+          where: {
+            product_id: productId
+          }
+        })
+      })
+      imageDetail.destroy({
+        where: {
+          product_id: productId
+        }
+      })
+      const param = {}
+      const where = {
+        id: productId
+      }
+      const include = [
+        {
+          model: imageDetail,
+          as: 'images',
+          attributes: ['image']
+        },
+        {
+          model: rentaller,
+          as: 'rentaller',
+          attributes: ['rental_name', 'address']
+        },
+        {
+          model: car_brand,
+          as: 'carBrand',
+          attributes: ['name']
+        },
+        {
+          model: transmission,
+          as: 'transmissionType',
+          attributes: ['name']
+        },
+        {
+          model: baggage_capacity,
+          as: 'baggageCapacity',
+          attributes: ['name']
+        },
+        {
+          model: fuel_type,
+          as: 'fuelType',
+          attributes: ['name']
+        },
+        {
+          model: additional_driver,
+          as: 'additionalDriver',
+          attributes: ['name']
+        },
+        {
+          model: person_capacity,
+          as: 'personCapacity',
+          attributes: ['name']
+        },
+        {
+          model: doors,
+          as: 'doorsType',
+          attributes: ['name']
+        },
+        {
+          model: manufacturing_year,
+          as: 'manufacturingYear',
+          attributes: ['name']
+        },
+        {
+          model: avg_fuel_consumption,
+          as: 'avgFuelConsumption',
+          attributes: ['name']
+        },
+        {
+          model: srs_airbag,
+          as: 'srsAirbag',
+          attributes: ['name']
+        }
+      ]
+      param.where = where
+      param.include = include
+      const data = await product.findOne(param)
+      if (files === undefined) {
+        response.status = 203
+        response.message = 'Edit Image Product Failed'
+        helpers.helpers(res, response)
+      } else {
+        response.status = 201
+        response.message = 'Product Image Has Been Edited'
+        response.data = data
         helpers.helpers(res, response)
       }
     } catch (err) {
