@@ -31,7 +31,7 @@
 ## Installation
 ### Clone
 ```
-$ git clone https://github.com/HiRahmat-Dev/carrent-api.git
+$ git clone https://github.com/haras94/carrent-api
 $ cd carrent-api
 $ npm install
 ```
