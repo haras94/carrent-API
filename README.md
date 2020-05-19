@@ -181,6 +181,12 @@ Fork the Project
           <b>Harun Arrasyid Suparman</b>
         </a>
       </td>
+       <td align="center">
+        <a href="https://github.com/bagakibadi">
+          <img width="150" src="https://avatars0.githubusercontent.com/u/31173796?s=460&v=4" alt="Bagus"><br/>
+          <b>Bagus</b>
+        </a>
+      </td>
     </tr>
   </table>
 </center>
