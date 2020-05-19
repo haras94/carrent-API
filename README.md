@@ -144,8 +144,8 @@ Fork the Project
 4. Open a Pull Request
 
 ## Related Project
-* [`Frontend-Carrent-VueJS`](https://github.com/HiRahmat-Dev/carrent-vuejs)
-* [`Backend-Carrent`](https://github.com/HiRahmat-Dev/carrent-api)
+* [`Frontend-Carrent-VueJS`](https://github.com/haras94/carrent-vuejs.git)
+* [`Backend-Carrent`](https://github.com/haras94/carrent-api.git)
 
 ## Contributors
 <center>
@@ -178,7 +178,7 @@ Fork the Project
       <td align="center">
         <a href="https://github.com/haras94">
           <img width="150" src="https://avatars2.githubusercontent.com/u/62143618?s=400&u=2e76db88db6de5ba0dddfa79c274c8e04f5e8f4a&v=4" alt="Harun"><br/>
-          <b>Harun</b>
+          <b>Harun Arrasyid Suparman</b>
         </a>
       </td>
     </tr>
